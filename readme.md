@@ -6,9 +6,6 @@ You can use **npm start** to test the exercise right away.
 
 ## Exercise:
 
-Create and use commonJS modules
-Create a script that uses module.exports to export a function.
-Create another script that uses require() to import the function and then calls it.
+Our HTTP server sends an HTML response body.
 
-Create and use ECMAScript modules
-Create a script that uses export default to export a function. Create another script that uses import to import the function and then calls it.
+Replace the text in the HTML with your own message. Run the server and use your web browser to test your changes.
