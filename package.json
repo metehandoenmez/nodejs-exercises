@@ -1,0 +1,12 @@
+{
+  "name": "nodejs-exercises",
+  "version": "1.0.0",
+  "description": "node.js exercises",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "metehandoenmez",
+  "license": "MIT"
+}
