@@ -1,17 +1,10 @@
-import { createServer } from "node:http";
+import figlet from "figlet";
 
-const server = createServer((request, response) => {
-  console.log("request received");
-
-  response.statusCode = 200;
-
-  response.setHeader("Content-Type", "text/html");
-
-  response.end(
-    "<html><body><h1>Some changes on the default message!</h1></body></html>"
-  );
-});
-
-server.listen(3000, () => {
-  console.log(`Server running at http://localhost:3000`);
+figlet("I love node.JS", function (err, data) {
+  if (err) {
+    console.log("Something went wrong...");
+    console.dir(err);
+    return;
+  }
+  console.log(data);
 });
