@@ -1,10 +1,11 @@
-import figlet from "figlet";
+import { writeFile } from "node:fs";
 
-figlet("I love node.JS", function (err, data) {
-  if (err) {
-    console.log("Something went wrong...");
-    console.dir(err);
-    return;
+let text =
+  "This is a sample text to be written to example.txt using node.js core fs method.";
+
+writeFile("example.txt", text, (err) => {
+  if (err) throw err;
+  else {
+    console.log("The file has been written.");
   }
-  console.log(data);
 });

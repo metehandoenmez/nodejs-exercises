@@ -1,0 +1,1 @@
+This is a sample text to be written to example.txt using node.js core fs method.
