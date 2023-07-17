@@ -10,9 +10,11 @@ The luckyDraw function returns a promise. Create a promise chain where the funct
 
 Log out the resolved value for each promise and handle any promise rejections in the chain.
 
+
+
 function luckyDraw(player) {
-return new Promise((resolve, reject) => {
-const win = Boolean(Math.round(Math.random()));
+  return new Promise((resolve, reject) => {
+    const win = Boolean(Math.round(Math.random()));
 
     process.nextTick(() => {
       if (win) {
@@ -21,6 +23,5 @@ const win = Boolean(Math.round(Math.random()));
         reject(new Error(`${player} lost the draw.`));
       }
     });
-
-});
+  });
 }
