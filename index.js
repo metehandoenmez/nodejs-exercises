@@ -1,11 +1,27 @@
-import { writeFile } from "node:fs";
+function luckyDraw(player) {
+  return new Promise((resolve, reject) => {
+    const win = Boolean(Math.round(Math.random()));
 
-let text =
-  "This is a sample text to be written to example.txt using node.js core fs method.";
+    process.nextTick(() => {
+      if (win) {
+        resolve(`${player} won a prize in the draw!`);
+      } else {
+        reject(new Error(`${player} lost the draw.`));
+      }
+    });
+  });
+}
 
-writeFile("example.txt", text, (err) => {
-  if (err) throw err;
-  else {
-    console.log("The file has been written.");
-  }
-});
+luckyDraw("Joe")
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => console.error(error.message))
+  //
+  .then(() => luckyDraw("Caroline"))
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error.message))
+  //
+  .then(() => luckyDraw("Sabrina"))
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error.message));
