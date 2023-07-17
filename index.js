@@ -12,16 +12,20 @@ function luckyDraw(player) {
   });
 }
 
-luckyDraw("Joe")
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => console.error(error.message))
-  //
-  .then(() => luckyDraw("Caroline"))
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error.message))
-  //
-  .then(() => luckyDraw("Sabrina"))
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error.message));
+async function getResults() {
+  try {
+    const tina = await luckyDraw("Tina");
+    console.log(tina);
+    const jorge = await luckyDraw("Jorge");
+    console.log(jorge);
+    const julien = await luckyDraw("Julien");
+    console.log(julien);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+getResults();
+
+// If Tina loses the draw, the function immediately catches the error and rest of the  promises are not called.
+// How can i fix this?, tried many methods.
