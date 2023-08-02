@@ -1,9 +1,6 @@
 import express from "express";
 import "express-async-errors";
 import morgan from "morgan";
-import { Request, Response } from "express";
-import multer from "multer"; //in case  of type error use npm i -D @types/multer
-import dotenv from "dotenv";
 import {
   getAll,
   getOneById,
@@ -12,14 +9,21 @@ import {
   deleteById,
   createImage,
 } from "./controllers/planets.js";
+import { logIn, signUp } from "./controllers/users.js";
+import multer from "multer"; //in case  of type error use npm i -D @types/multer
 
-dotenv.config();
+import "./passport.js";
 
 const app = express();
-const port = process.env.PORT;
+const port = 3000;
 
-app.use(express.json());
+app.use("/uploads", express.static("uploads")); //or public
+//on browser,
+//localhost:3000/uploads/earth.jpg
+app.use("/static", express.static("static")); //to show files on browser
+
 app.use(morgan("dev"));
+app.use(express.json());
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -42,11 +46,13 @@ app.put("/api/planets/:id", updateById);
 
 app.delete("/api/planets/:id", deleteById);
 
-app.post("/api/planets/:id/image", upload.single("image"), createImage);
+//new route for upload
+
+app.post("/api/planets/:id/image", upload.single("image"), createImage); //upload.single is a middleware, we will have access to middleware inside the createImage fnc on ctrller file
+
+app.post("/api/users/login", logIn);
+app.post("/api/users/signup", signUp);
 
 app.listen(port, () => {
-  console.log(`App listening on port http://localhost:${port}`);
+  console.log(`Example app listening on port http://localhost:${port}`);
 });
-
-//port 3000 was giving constant "already in use" error even though it is not
-//tried 3002 and works fine
