@@ -9,9 +9,9 @@ import {
   deleteById,
   createImage,
 } from "./controllers/planets.js";
-import { logIn, signUp } from "./controllers/users.js";
+import { logIn, signUp, logOut } from "./controllers/users.js";
 import multer from "multer"; //in case  of type error use npm i -D @types/multer
-
+import authorize from "./authorize.js";
 import "./passport.js";
 
 const app = express();
@@ -48,10 +48,16 @@ app.delete("/api/planets/:id", deleteById);
 
 //new route for upload
 
-app.post("/api/planets/:id/image", upload.single("image"), createImage); //upload.single is a middleware, we will have access to middleware inside the createImage fnc on ctrller file
+app.post(
+  "/api/planets/:id/image",
+  authorize,
+  upload.single("image"),
+  createImage
+); //upload.single is a middleware, we will have access to middleware inside the createImage fnc on ctrller file
 
 app.post("/api/users/login", logIn);
 app.post("/api/users/signup", signUp);
+app.get("/api/users/logout", authorize, logOut);
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
